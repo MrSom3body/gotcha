@@ -98,15 +98,14 @@ func GetMemory() string {
 	memoryUsed := 0.0
 
 	for scanner.Scan() {
-		line := strings.Fields(scanner.Text())
-		switch line[0] {
-		case "MemTotal:":
-			memoryTotal, err = strconv.ParseFloat(line[1], 64)
+		line := scanner.Text()
+		if strings.HasPrefix(line, "MemTotal:") {
+			memoryTotal, err = strconv.ParseFloat(strings.Fields(line)[1], 64)
 			if err != nil {
 				log.Fatal(err)
 			}
-		case "MemAvailable:":
-			memoryAvailable, err = strconv.ParseFloat(line[1], 64)
+		} else if strings.HasPrefix(line, "MemAvailable:") {
+			memoryAvailable, err = strconv.ParseFloat(strings.Fields(line)[1], 64)
 			if err != nil {
 				log.Fatal(err)
 			}
