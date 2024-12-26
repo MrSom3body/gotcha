@@ -22,7 +22,8 @@ func GetDistribution() string {
 
 	for scanner.Scan() {
 		if strings.Contains(scanner.Text(), "PRETTY_NAME") {
-			return strings.Trim(strings.Split(scanner.Text(), "=")[1], "\"")
+			equals := strings.Index(scanner.Text(), "=")
+			return strings.Trim(scanner.Text()[equals+1:], "\"")
 		}
 	}
 
