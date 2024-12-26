@@ -77,9 +77,11 @@ func GetUptime() string {
 
 func GetShell() string {
 	shell := os.Getenv("SHELL")
-	shellPath := strings.Split(shell, "/")
-	shell = shellPath[len(shellPath)-1]
-	return shell
+	lastSlash := strings.LastIndex(shell, "/")
+	if lastSlash == -1 {
+		return shell
+	}
+	return shell[lastSlash+1:]
 }
 
 func GetMemory() string {
