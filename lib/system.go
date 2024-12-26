@@ -37,6 +37,14 @@ func GetKernel() string {
 	return strings.TrimSpace(string(content))
 }
 
+func plural(value int) string {
+	if value > 1 {
+		return "s"
+	} else {
+		return ""
+	}
+}
+
 func GetUptime() string {
 	rawContent, err := os.ReadFile("/proc/uptime")
 	if err != nil {
@@ -48,35 +56,23 @@ func GetUptime() string {
 		log.Fatal(err)
 	}
 
-	output := ""
+	parts := make([]string, 0, 3)
 	total_minutes := int(math.Round(uptime / 60))
 	days := total_minutes / (60 * 24)
 	hours := (total_minutes % (60 * 24)) / 60
 	minutes := total_minutes % 60
 
 	if days > 0 {
-		output += fmt.Sprint(days, " day")
-		if days > 1 {
-			output += "s"
-		}
-		output += " "
+		parts = append(parts, fmt.Sprintf("%d day%s", days, plural(days)))
 	}
 	if hours > 0 {
-		output += fmt.Sprint(hours, " hour")
-		if hours > 1 {
-			output += "s"
-		}
-		output += " "
+		parts = append(parts, fmt.Sprintf("%d hour%s", hours, plural(hours)))
 	}
 	if minutes > 0 {
-		output += fmt.Sprint(minutes, " minute")
-		if minutes > 1 {
-			output += "s"
-		}
-		output += " "
+		parts = append(parts, fmt.Sprintf("%d minute%s", minutes, plural(minutes)))
 	}
 
-	return output
+	return strings.Join(parts, " ")
 }
 
 func GetShell() string {
