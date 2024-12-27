@@ -7,30 +7,17 @@
     self,
     nixpkgs,
   }: let
-    supportedSystems = ["x86_64-linux" "aarch64-linux"];
-
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
-    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+    systems = ["x86_64-linux" "aarch64-linux"];
+    forEachSystem = nixpkgs.lib.genAttrs systems;
+    pkgsForEach = nixpkgs.legacyPackages;
   in {
-    packages = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
-    in {
+    packages = forEachSystem (system: {
       default = self.packages.${system}.gotcha;
-      gotcha = pkgs.callPackage ./nix/package.nix {};
+      gotcha = pkgsForEach.${system}.callPackage ./nix/package.nix {};
     });
 
-    devShells = forAllSystems (system: let
-      pkgs = nixpkgsFor.${system};
-    in {
-      default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          go
-          gopls
-          gotools
-          go-tools
-        ];
-      };
+    devShells = forEachSystem (system: {
+      default = pkgsForEach.${system}.callPackage ./nix/shell.nix {};
     });
   };
 }
