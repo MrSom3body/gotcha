@@ -39,7 +39,13 @@ inputs = {
 Andddd add this the package to home-manager or your system wide nix config:
 
 ```nix
-inputs.gotcha.packages.${pkgs.system}.gotcha
+inputs.gotcha.packages.${pkgs.system}.default
+```
+
+If you want to change the interface name for the IP you can override the package like this:
+
+```nix
+(inputs.gotcha.packages.${pkgs.system}.default.override {interface = "ens33";})
 ```
 
 ## why this name?
