@@ -52,6 +52,6 @@ If you want to change the interface name for the IP you can override the package
 
 ## why this name?
 
-go + fetch -> gofetch -> gotch -> gotcha
+go + fetch → gofetch → gotch → gotcha
 
 I know gotcha makes absolutely no sense for a fetcher but idc :)
