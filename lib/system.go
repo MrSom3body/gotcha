@@ -121,29 +121,23 @@ func GetMemory() string {
 }
 
 func GetIpAddress() string {
-	int, err := net.InterfaceByName("wlp2s0")
-	if err != nil {
-		log.Fatal(err)
-	}
-	item, err := int.Addrs()
+	iface, err := net.InterfaceByName("wlp2s0")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var ip net.IP
-	for _, addr := range item {
-		switch v := addr.(type) {
-		case *net.IPNet:
-			if !v.IP.IsLoopback() {
-				if v.IP.To4() != nil {
-					ip = v.IP
-				}
+	addrs, err := iface.Addrs()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, addr := range addrs {
+		if ipNet, ok := addr.(*net.IPNet); ok && !ipNet.IP.IsLoopback() {
+			if ip := ipNet.IP.To4(); ip != nil {
+				return ip.String()
 			}
 		}
 	}
-	if ip != nil {
-		return ip.String()
-	} else {
-		return ""
-	}
+
+	return ""
 }
