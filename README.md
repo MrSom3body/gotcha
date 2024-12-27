@@ -15,9 +15,9 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
   - shell
   - desktop environment/window manager
   - memory usage
-  - (my[^1]) local ip
+  - (by default my[^1]) local ip
 
-[^1]: why my you may ask? Because I hard-coded my Interface 🤡
+[^1]: why my you may ask? Because gotcha builds with my interface name by default (see [here](#overrideInterface) on how to override) 🤡
 
 ## installation
 
@@ -43,6 +43,8 @@ inputs.gotcha.packages.${pkgs.system}.default
 ```
 
 If you want to change the interface name for the IP you can override the package like this:
+
+<a id="overrideInterface"></a>
 
 ```nix
 (inputs.gotcha.packages.${pkgs.system}.default.override {interface = "ens33";})
