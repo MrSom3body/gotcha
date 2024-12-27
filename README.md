@@ -2,7 +2,7 @@
 
 ![preview](.github/assets/preview.png)
 
-gotcha is a small fetcher written in go. It has absolutely no customization (at least for now) and is primarily intended for my system only.
+gotcha is a small fetcher written in go. It has absolutely no customization (at least for now) and is primarily intended for my system.
 
 ## features
 
