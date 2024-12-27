@@ -1,6 +1,6 @@
 {
   buildGoModule,
-  IfaceName ? "wlp2s0",
+  interface ? "wlp2s0",
 }:
 buildGoModule {
   pname = "gotcha";
@@ -9,6 +9,6 @@ buildGoModule {
   vendorHash = "sha256-hocnLCzWN8srQcO3BMNkd2lt0m54Qe7sqAhUxVZlz1k=";
 
   ldflags = [
-    "-X 'github.com/MrSom3body/gotcha/cmd.IfaceName=${IfaceName}'"
+    "-X 'github.com/MrSom3body/gotcha/cmd.IfaceName=${interface}'"
   ];
 }
