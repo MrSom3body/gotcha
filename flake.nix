@@ -7,9 +7,6 @@
     self,
     nixpkgs,
   }: let
-    lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
-    version = builtins.substring 0 8 lastModifiedDate;
-
     supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
 
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -19,12 +16,8 @@
     packages = forAllSystems (system: let
       pkgs = nixpkgsFor.${system};
     in {
-      gotcha = pkgs.buildGoModule {
-        pname = "gotcha";
-        inherit version;
-        src = ./.;
-        vendorHash = "sha256-hocnLCzWN8srQcO3BMNkd2lt0m54Qe7sqAhUxVZlz1k=";
-      };
+      default = self.packages.${system}.gotcha;
+      gotcha = pkgs.callPackage ./nix/package.nix {};
     });
 
     devShells = forAllSystems (system: let
@@ -39,7 +32,5 @@
         ];
       };
     });
-
-    defaultPackage = forAllSystems (system: self.packages.${system}.gotcha);
   };
 }

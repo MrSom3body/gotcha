@@ -120,8 +120,8 @@ func GetMemory() string {
 	return fmt.Sprintf("%.1f GiB / %.1f GiB", memoryUsed, memoryTotal)
 }
 
-func GetIpAddress() string {
-	iface, err := net.InterfaceByName("wlp2s0")
+func GetIpAddress(ifaceName string) string {
+	iface, err := net.InterfaceByName(ifaceName)
 	if err != nil {
 		log.Fatal(err)
 	}
