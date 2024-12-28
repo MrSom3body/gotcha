@@ -139,5 +139,5 @@ func GetIpAddress(ifaceName string) string {
 		}
 	}
 
-	return ""
+	return "no ip on `" + ifaceName + "`"
 }
