@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var IfaceName string
+var IfaceName string = "lo"
 
 var rootCmd = &cobra.Command{
 	Use:   "gotcha",
