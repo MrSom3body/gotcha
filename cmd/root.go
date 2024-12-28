@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var IfaceName string = "lo"
+var ifaceName string = "lo"
 
 var rootCmd = &cobra.Command{
 	Use:   "gotcha",
@@ -49,7 +49,7 @@ var rootCmd = &cobra.Command{
 			lib.GetMemory(),
 			keyColor,
 			lib.Colors.Reset,
-			lib.GetIpAddress(IfaceName),
+			lib.GetIpAddress(ifaceName),
 			lib.GetColors())
 	},
 }

@@ -9,6 +9,6 @@ buildGoModule {
   vendorHash = "sha256-hocnLCzWN8srQcO3BMNkd2lt0m54Qe7sqAhUxVZlz1k=";
 
   ldflags = [
-    "-X 'github.com/MrSom3body/gotcha/cmd.IfaceName=${interface}'"
+    "-X 'github.com/MrSom3body/gotcha/cmd.ifaceName=${interface}'"
   ];
 }
