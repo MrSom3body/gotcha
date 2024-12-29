@@ -17,7 +17,7 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
   - memory usage
   - (by default my[^1]) local ip
 
-[^1]: why my you may ask? Because gotcha builds with my interface name by default (see [here](#overrideInterface) on how to override) 🤡
+[^1]: why my you may ask? Because gotcha builds with my interface name by default (see [here](#overrides) on how to override) 🤡
 
 ## installation
 
@@ -44,14 +44,6 @@ Andddd add this the package to home-manager or your system wide nix config:
 inputs.gotcha.packages.${pkgs.system}.default
 ```
 
-If you want to change the interface name for the IP you can override the package like this:
-
-<a id="overrideInterface"></a>
-
-```nix
-(inputs.gotcha.packages.${pkgs.system}.default.override {ifaceName = "ens33";})
-```
-
 ### all other distributions
 
 Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compile it yourself if you want an useful output for your local IP. You can do that really easy by installing go and running the following commands:
@@ -59,7 +51,33 @@ Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compi
 ```bash
 git clone github.com/MrSom3body/gotcha
 cd gotcha
-go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.ifaceName=INTERFACE'"
+go build -ldflags="-s -w"
+```
+
+### overrides
+
+There is no real configuration, but you can override some values to change some things. The process of this is imo easier for nix but if you compile it yourself because you use a ~inferior~ different distro you need to do so with some flags.
+
+| Key       | Description                                     |
+| --------- | ----------------------------------------------- |
+| ifaceName | The interface name from which to display the ip |
+
+#### nix overrides
+
+If you want to change the interface name for the IP you can override the package like this:
+
+```nix
+(inputs.gotcha.packages.${pkgs.system}.default.override {
+  <key> = "<value>";
+})
+```
+
+#### compiling
+
+For every override you want to add you must add this `-X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
+
+```bash
+go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'"
 ```
 
 ## why this name?
