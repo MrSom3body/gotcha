@@ -2,7 +2,7 @@
   buildGoModule,
   interface ? "wlp2s0",
 }:
-buildGoModule {
+buildGoModule rec {
   pname = "gotcha";
   version = "0.1.2";
   src = ./..;
@@ -13,6 +13,7 @@ buildGoModule {
   ldflags = [
     "-s -w"
     "-X 'github.com/MrSom3body/gotcha/cmd.ifaceName=${interface}'"
+    "-X 'github.com/MrSom3body/gotcha/cmd.version=${version}'"
     "-extldflags '-static'"
   ];
 }

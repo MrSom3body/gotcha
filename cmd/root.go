@@ -8,12 +8,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var ifaceName string = "lo"
+var (
+	ifaceName string = "lo"
+	version   string
+)
 
 var rootCmd = &cobra.Command{
-	Use:   "gotcha",
-	Short: "gotcha a quick little fetch tool",
-	Long:  "gotcha a quick little fetch tool written in go",
+	Use:     "gotcha",
+	Version: version,
+	Short:   "gotcha a quick little fetch tool",
+	Long:    "gotcha a quick little fetch tool written in go",
 	Run: func(cmd *cobra.Command, args []string) {
 		keyColor := lib.Colors.Green
 		format := `
