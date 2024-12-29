@@ -21,6 +21,8 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
 
 ## installation
 
+### nix (with flakes)
+
 Add this thingy to your inputs:
 
 ```nix
@@ -48,6 +50,16 @@ If you want to change the interface name for the IP you can override the package
 
 ```nix
 (inputs.gotcha.packages.${pkgs.system}.default.override {interface = "ens33";})
+```
+
+### all other distributions
+
+Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compile it yourself if you want an useful output for your local IP. You can do that really easy by installing go and running the following commands:
+
+```bash
+git clone github.com/MrSom3body/gotcha
+cd gotcha
+go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.ifaceName=INTERFACE'"
 ```
 
 ## why this name?
