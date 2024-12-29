@@ -21,13 +21,13 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		keyColor := lib.Colors.Green
 		format := `
- %s󰌽  Distro     %s %s
- %s  Kernel     %s %s
- %s  Uptime     %s %s
- %s  Shell      %s %s
- %s󰧨  DE/WM      %s %s
- %s  Memory     %s %s
- %s  Local IP   %s %s
+ %s󰌽  Distro    %s  %s
+ %s  Kernel    %s  %s
+ %s  Uptime    %s  %s
+ %s  Shell     %s  %s
+ %s󰧨  DE/WM     %s  %s
+ %s  Memory    %s  %s
+ %s  Local IP  %s  %s
 
     %s
 `
