@@ -16,21 +16,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v30
         with:
-          go-version-file: 'go.mod'
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compile go binary
-        env:
-          CGO_ENABLED: 0
-          GOOS: linux
-          GOARCH: amd64
+      - name: Compile binary
         run: |
-          mkdir -p dist
-          go build \
-            -ldflags="-s -w -extldflags '-static'" \
-            -o dist/
+          nix build
       
       - name: Create release
         env:
@@ -48,4 +41,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
-          gh release upload "$tag" dist/* --repo="$GITHUB_REPOSITORY"
+          gh release upload "$tag" result/bin/* --repo="$GITHUB_REPOSITORY"
