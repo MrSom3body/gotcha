@@ -49,7 +49,7 @@ If you want to change the interface name for the IP you can override the package
 <a id="overrideInterface"></a>
 
 ```nix
-(inputs.gotcha.packages.${pkgs.system}.default.override {interface = "ens33";})
+(inputs.gotcha.packages.${pkgs.system}.default.override {ifaceName = "ens33";})
 ```
 
 ### all other distributions

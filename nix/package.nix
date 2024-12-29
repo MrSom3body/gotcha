@@ -1,6 +1,6 @@
 {
   buildGoModule,
-  interface ? "wlp2s0",
+  ifaceName ? "wlp2s0",
 }:
 buildGoModule rec {
   pname = "gotcha";
@@ -12,7 +12,7 @@ buildGoModule rec {
 
   ldflags = [
     "-s -w"
-    "-X 'github.com/MrSom3body/gotcha/cmd.ifaceName=${interface}'"
+    "-X 'github.com/MrSom3body/gotcha/cmd.ifaceName=${ifaceName}'"
     "-X 'github.com/MrSom3body/gotcha/cmd.version=${version}'"
     "-extldflags '-static'"
   ];
