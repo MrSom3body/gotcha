@@ -1,6 +1,6 @@
 {
   buildGoModule,
-  ifaceName ? "wlp2s0",
+  ifaceName ? "lo",
 }:
 buildGoModule rec {
   pname = "gotcha";
