@@ -33,8 +33,7 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="$tag" \
-              --generate-notes \
-              -d
+              --generate-notes
 
       - name: Upload assets
         env:
