@@ -16,8 +16,11 @@ var (
 var rootCmd = &cobra.Command{
 	Use:     "gotcha",
 	Version: version,
-	Short:   "gotcha a quick little fetch tool",
-	Long:    "gotcha a quick little fetch tool written in go",
+	Short:   "gotcha - a fast and small fetch tool for Linux 🐹",
+	Long: `gotcha is a speedy and minimalistic fetch tool written in Go. 
+It provides essential system information such as distribution, kernel version, 
+uptime, shell, desktop environment/window manager, memory usage, and local IP.
+Customization is minimal by design, focusing on simplicity and speed.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		keyColor := lib.Colors.Green
 		format := `
