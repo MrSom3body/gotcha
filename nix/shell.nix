@@ -4,6 +4,7 @@
   gopls,
   gotools,
   go-tools,
+  just,
 }:
 mkShell {
   buildInputs = [
@@ -11,5 +12,9 @@ mkShell {
     gopls
     gotools
     go-tools
+  ];
+
+  packages = [
+    just
   ];
 }
