@@ -4,7 +4,7 @@
 
 gotcha is a small fetcher written in go. It has absolutely no customization (at least for now) and is primarily intended for my system.
 
-## features
+## ✨ features
 
 - speedy boi (on my machine [<2ms](#benchmarks))
 - no dependencies besides linux and the binary itself (and go for building duh)
@@ -19,7 +19,7 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
 
 [^1]: why my you may ask? Because gotcha builds with my interface name by default (see [here](#overrides) on how to override) 🤡
 
-## benchmarks
+## 🛠️ benchmarks
 
 With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I know (and mine ofc):
 
@@ -33,9 +33,9 @@ With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I
 
 <sub>created with [hyperfine](https://github.com/sharkdp/hyperfine)</sub>
 
-## installation
+## 📦 installation
 
-### nix (with flakes)
+### ❄️ nix (with flakes)
 
 Add this thingy to your inputs:
 
@@ -58,7 +58,7 @@ Andddd add this the package to home-manager or your system wide nix config:
 inputs.gotcha.packages.${pkgs.system}.default
 ```
 
-### all other distributions
+### 🐧 all other distributions
 
 Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compile it yourself if you want an useful output for your local IP. You can do that really easy by installing go and running the following commands:
 
@@ -68,7 +68,7 @@ cd gotcha
 go build -ldflags="-s -w"
 ```
 
-### overrides
+### 🧰 overrides
 
 There is no real configuration, but you can override some values to change some things. The process of this is imo easier for nix but if you compile it yourself because you use a ~inferior~ different distro you need to do so with some flags.
 
@@ -76,7 +76,7 @@ There is no real configuration, but you can override some values to change some 
 | --------- | ----------------------------------------------- |
 | ifaceName | The interface name from which to display the ip |
 
-#### nix overrides
+#### ❄️ nix overrides
 
 If you want to change the interface name for the IP you can override the package like this:
 
@@ -86,7 +86,7 @@ If you want to change the interface name for the IP you can override the package
 })
 ```
 
-#### compiling
+#### 🔨 compiling
 
 For every override you want to add you must add this `-X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
 
@@ -94,7 +94,7 @@ For every override you want to add you must add this `-X 'github.com/MrSom3body/
 go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'"
 ```
 
-## why this name?
+## 🤔 why this name?
 
 go + fetch → gofetch → gotch → gotcha
 
