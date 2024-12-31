@@ -1,2 +1,5 @@
-.direnv
+.direnv/
 result
+
+# ignore compiled binary
+gotcha
