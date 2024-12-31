@@ -6,7 +6,7 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
 
 ## features
 
-- speedy boi (on my machine <4ms)
+- speedy boi (on my machine [<2ms](#benchmarks))
 - no dependencies besides linux and the binary itself (and go for building duh)
 - displays:
   - distribution
@@ -18,6 +18,20 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
   - (by default my[^1]) local ip
 
 [^1]: why my you may ask? Because gotcha builds with my interface name by default (see [here](#overrides) on how to override) 🤡
+
+## benchmarks
+
+With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I know (and mine ofc):
+
+| Command     |   Mean [ms] | Min [ms] | Max [ms] |       Relative |
+| :---------- | ----------: | -------: | -------: | -------------: |
+| `gotcha`    |   1.7 ± 0.2 |      1.3 |      2.3 |           1.00 |
+| `macchina`  |   2.4 ± 0.3 |      1.7 |      3.4 |    1.35 ± 0.19 |
+| `neofetch`  | 529.6 ± 7.4 |    521.0 |    544.1 | 302.87 ± 28.97 |
+| `fastfetch` |  63.1 ± 3.7 |     59.4 |     78.8 |   36.11 ± 4.01 |
+| `pfetch`    | 122.8 ± 3.7 |    118.8 |    131.6 |   70.25 ± 6.98 |
+
+<sub>created with [hyperfine](https://github.com/sharkdp/hyperfine)</sub>
 
 ## installation
 
