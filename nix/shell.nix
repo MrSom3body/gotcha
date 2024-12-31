@@ -4,6 +4,7 @@
   gopls,
   gotools,
   go-tools,
+  hyperfine,
   just,
 }:
 mkShell {
@@ -15,6 +16,7 @@ mkShell {
   ];
 
   packages = [
+    hyperfine
     just
   ];
 }
