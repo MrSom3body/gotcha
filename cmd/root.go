@@ -22,7 +22,7 @@ It provides essential system information such as distribution, kernel version,
 uptime, shell, desktop environment/window manager, memory usage, and local IP.
 Customization is minimal by design, focusing on simplicity and speed.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		keyColor := lib.Colors.Green
+		keyColor := lib.Colors.Blue
 		format := `
  %s󰌽  Distro    %s  %s
  %s  Kernel    %s  %s
