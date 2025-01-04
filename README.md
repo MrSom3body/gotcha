@@ -23,13 +23,13 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
 
 With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I know (and mine ofc):
 
-| Command     |   Mean [ms] | Min [ms] | Max [ms] |       Relative |
-| :---------- | ----------: | -------: | -------: | -------------: |
-| `gotcha`    |   1.7 ± 0.2 |      1.3 |      2.3 |           1.00 |
-| `macchina`  |   2.4 ± 0.3 |      1.7 |      3.4 |    1.35 ± 0.19 |
-| `neofetch`  | 529.6 ± 7.4 |    521.0 |    544.1 | 302.87 ± 28.97 |
-| `fastfetch` |  63.1 ± 3.7 |     59.4 |     78.8 |   36.11 ± 4.01 |
-| `pfetch`    | 122.8 ± 3.7 |    118.8 |    131.6 |   70.25 ± 6.98 |
+| Command     |    Mean [ms] | Min [ms] | Max [ms] |       Relative |
+| :---------- | -----------: | -------: | -------: | -------------: |
+| `gotcha`    |    1.6 ± 0.2 |      1.2 |      2.1 |           1.00 |
+| `macchina`  |   11.6 ± 0.7 |     10.3 |     15.4 |    7.06 ± 0.83 |
+| `neofetch`  | 527.8 ± 11.7 |    507.7 |    547.8 | 320.03 ± 33.31 |
+| `fastfetch` |   62.5 ± 1.2 |     60.6 |     67.1 |   37.91 ± 3.93 |
+| `pfetch`    |  130.8 ± 1.3 |    127.9 |    134.0 |   79.33 ± 8.11 |
 
 <sub>created with [hyperfine](https://github.com/sharkdp/hyperfine)</sub>
 
