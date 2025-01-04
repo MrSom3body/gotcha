@@ -21,9 +21,8 @@ func GetDistribution() string {
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		if strings.Contains(scanner.Text(), "PRETTY_NAME") {
-			equals := strings.Index(scanner.Text(), "=")
-			return strings.Trim(scanner.Text()[equals+1:], "\"")
+		if strings.HasPrefix(scanner.Text(), "PRETTY_NAME=") {
+			return strings.Trim(scanner.Text()[13:], "\"")
 		}
 	}
 
