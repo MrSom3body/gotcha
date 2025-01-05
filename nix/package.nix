@@ -4,7 +4,7 @@
 }:
 buildGoModule rec {
   pname = "gotcha";
-  version = "1.0.2";
+  version = "1.0.3";
   src = ./..;
   vendorHash = "sha256-hocnLCzWN8srQcO3BMNkd2lt0m54Qe7sqAhUxVZlz1k=";
 
