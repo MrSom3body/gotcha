@@ -22,7 +22,7 @@ It provides essential system information such as distribution, kernel version,
 uptime, shell, desktop environment/window manager, memory usage, and local IP.
 Customization is minimal by design, focusing on simplicity and speed.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		keyColor := lib.Colors.Blue
+		keyColor := lib.Colors.Values[4]
 		format := `
  %s󰌽  Distro    %s  %s
  %s  Kernel    %s  %s
@@ -36,34 +36,13 @@ Customization is minimal by design, focusing on simplicity and speed.`,
 `
 
 		fmt.Printf(format,
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetDistribution(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetKernel(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetUptime(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetShell(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetDesktopEnvironment(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetMemory(),
-
-			keyColor,
-			lib.Colors.Reset,
-			lib.GetIpAddress(ifaceName),
-
+			keyColor, lib.Colors.Reset, lib.GetDistribution(),
+			keyColor, lib.Colors.Reset, lib.GetKernel(),
+			keyColor, lib.Colors.Reset, lib.GetUptime(),
+			keyColor, lib.Colors.Reset, lib.GetShell(),
+			keyColor, lib.Colors.Reset, lib.GetDesktopEnvironment(),
+			keyColor, lib.Colors.Reset, lib.GetMemory(),
+			keyColor, lib.Colors.Reset, lib.GetIpAddress(ifaceName),
 			lib.GetColors())
 	},
 }
