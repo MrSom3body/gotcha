@@ -72,9 +72,10 @@ go build -ldflags="-s -w"
 
 There is no real configuration, but you can override some values to change some things. The process of this is imo easier for nix but if you compile it yourself because you use a ~inferior~ different distro you need to do so with some flags.
 
-| Key       | Description                                     |
-| --------- | ----------------------------------------------- |
-| ifaceName | The interface name from which to display the ip |
+| Key       | Description                                                       |
+| --------- | ----------------------------------------------------------------- |
+| ifaceName | The interface name from which to display the ip                   |
+| color     | The integer value of the color (0-7) you want to use for the keys |
 
 #### ❄️ nix overrides
 

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/MrSom3body/gotcha/lib"
 	"github.com/spf13/cobra"
@@ -11,6 +12,7 @@ import (
 var (
 	ifaceName string = "lo"
 	version   string
+	color     string = "4"
 )
 
 var rootCmd = &cobra.Command{
@@ -22,7 +24,8 @@ It provides essential system information such as distribution, kernel version,
 uptime, shell, desktop environment/window manager, memory usage, and local IP.
 Customization is minimal by design, focusing on simplicity and speed.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		keyColor := lib.Colors.Values[4]
+		colorInt, _ := strconv.Atoi(color)
+		keyColor := lib.Colors.Values[colorInt]
 		format := `
  %s󰌽  Distro    %s  %s
  %s  Kernel    %s  %s
