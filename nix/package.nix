@@ -1,6 +1,6 @@
 {
   buildGoModule,
-  color ? "4",
+  color ? "6",
   ifaceName ? "lo",
 }:
 buildGoModule rec {
