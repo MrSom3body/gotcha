@@ -63,7 +63,7 @@ inputs.gotcha.packages.${pkgs.system}.default
 Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compile it yourself if you want an useful output for your local IP. You can do that really easy by installing go and running the following commands:
 
 ```bash
-git clone github.com/MrSom3body/gotcha
+git clone https://github.com/MrSom3body/gotcha
 cd gotcha
 go build -ldflags="-s -w"
 ```
