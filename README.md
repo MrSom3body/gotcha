@@ -72,10 +72,15 @@ go build -ldflags="-s -w"
 
 There is no real configuration, but you can override some values to change some things. The process of this is imo easier for nix but if you compile it yourself because you use a ~inferior~ different distro you need to do so with some flags.
 
-| Key       | Default Value | Description                                                       |
-| --------- | ------------- | ----------------------------------------------------------------- |
-| ifaceName | lo            | The interface name from which to display the ip                   |
-| color     | 4             | The integer value of the color (0-7) you want to use for the keys |
+| Key       | Default Value | Description                                                           |
+| --------- | ------------- | --------------------------------------------------------------------- |
+| ifaceName | lo            | The interface name from which to display the ip                       |
+| color     | 4             | The integer value of the color (0-7[^2]) you want to use for the keys |
+
+[^2]:
+    Use one of these commands to display the 8 colors:  
+    bash: `for i in $(seq 0 7); do tput setaf $i && echo $i; done`  
+    fish: `for i in (seq 0 7); tput setaf $i && echo $i; end`
 
 #### ❄️ nix overrides
 
