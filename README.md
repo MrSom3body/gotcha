@@ -75,7 +75,7 @@ There is no real configuration, but you can override some values to change some 
 | Key       | Default Value | Description                                                           |
 | --------- | ------------- | --------------------------------------------------------------------- |
 | ifaceName | lo            | The interface name from which to display the ip                       |
-| color     | 4             | The integer value of the color (0-7[^2]) you want to use for the keys |
+| color     | 6             | The integer value of the color (0-7[^2]) you want to use for the keys |
 
 [^2]:
     Use one of these commands to display the 8 colors:  
