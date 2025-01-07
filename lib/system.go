@@ -131,7 +131,7 @@ func GetIpAddress(ifaceName string) string {
 	}
 
 	for _, addr := range addrs {
-		if ipNet, ok := addr.(*net.IPNet); ok && !ipNet.IP.IsLoopback() {
+		if ipNet, ok := addr.(*net.IPNet); ok {
 			if ip := ipNet.IP.To4(); ip != nil {
 				return ip.String()
 			}
