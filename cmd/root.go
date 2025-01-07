@@ -35,7 +35,7 @@ Customization is minimal by design, focusing on simplicity and speed.`,
  %s  Memory    %s  %s
  %s  Local IP  %s  %s
 
-    %s
+ %s
 `
 
 		fmt.Printf(format,
