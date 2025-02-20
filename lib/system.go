@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"log"
-	"math"
 	"net"
 	"os"
 	"strconv"
@@ -51,16 +50,16 @@ func GetUptime() string {
 		log.Fatal(err)
 	}
 
-	uptime, err := strconv.ParseFloat(strings.Fields(string(rawContent))[0], 64)
+	uptime_float, err := strconv.ParseFloat(strings.Fields(string(rawContent))[0], 64)
 	if err != nil {
 		log.Fatal(err)
 	}
+	uptime := int(uptime_float)
 
 	parts := make([]string, 0, 3)
-	total_minutes := int(math.Round(uptime / 60))
-	days := total_minutes / (60 * 24)
-	hours := (total_minutes % (60 * 24)) / 60
-	minutes := total_minutes % 60
+	days := (uptime / (60 * 60 * 24))
+	hours := (uptime / 3600) % 24
+	minutes := (uptime / 60) % 60
 
 	if days > 0 {
 		parts = append(parts, fmt.Sprintf("%d day%s", days, plural(days)))
