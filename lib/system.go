@@ -118,24 +118,33 @@ func GetMemory() string {
 	return fmt.Sprintf("%.1f GiB / %.1f GiB", memoryUsed, memoryTotal)
 }
 
-func GetIpAddress(ifaceName string) string {
-	iface, err := net.InterfaceByName(ifaceName)
+func GetIpAddress() string {
+	interfaces, err := net.Interfaces()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	addrs, err := iface.Addrs()
-	if err != nil {
-		log.Fatal(err)
-	}
+	for _, iface := range interfaces {
+		if !strings.HasPrefix(iface.Name, "en") &&
+			!strings.HasPrefix(iface.Name, "wl") ||
+			iface.Flags&net.FlagUp == 0 ||
+			iface.Flags&net.FlagLoopback != 0 {
+			continue
+		}
 
-	for _, addr := range addrs {
-		if ipNet, ok := addr.(*net.IPNet); ok {
-			if ip := ipNet.IP.To4(); ip != nil {
-				return ip.String()
+		addrs, err := iface.Addrs()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		for _, addr := range addrs {
+			if ipNet, ok := addr.(*net.IPNet); ok {
+				if ip := ipNet.IP.To4(); ip != nil {
+					return ip.String()
+				}
 			}
 		}
 	}
 
-	return "no ip on `" + ifaceName + "`"
+	return "no internet 😥"
 }

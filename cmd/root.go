@@ -45,7 +45,7 @@ Customization is minimal by design, focusing on simplicity and speed.`,
 			keyColor, lib.Colors.Reset, lib.GetShell(),
 			keyColor, lib.Colors.Reset, lib.GetDesktopEnvironment(),
 			keyColor, lib.Colors.Reset, lib.GetMemory(),
-			keyColor, lib.Colors.Reset, lib.GetIpAddress(ifaceName),
+			keyColor, lib.Colors.Reset, lib.GetIpAddress(),
 			lib.GetColors())
 	},
 }

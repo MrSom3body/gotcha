@@ -1,7 +1,6 @@
 {
   buildGoModule,
   color ? "6",
-  ifaceName ? "lo",
 }:
 buildGoModule rec {
   pname = "gotcha";
@@ -13,7 +12,6 @@ buildGoModule rec {
 
   ldflags = [
     "-s -w"
-    "-X 'github.com/MrSom3body/gotcha/cmd.ifaceName=${ifaceName}'"
     "-X 'github.com/MrSom3body/gotcha/cmd.color=${color}'"
     "-X 'github.com/MrSom3body/gotcha/cmd.version=${version}'"
     "-extldflags '-static'"
