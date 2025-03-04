@@ -10,9 +10,8 @@ import (
 )
 
 var (
-	ifaceName string = "lo"
-	version   string
-	color     string = "6"
+	version string
+	color   string = "6"
 )
 
 var rootCmd = &cobra.Command{
