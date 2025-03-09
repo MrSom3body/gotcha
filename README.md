@@ -15,9 +15,9 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
   - shell
   - desktop environment/window manager
   - memory usage
-  - (by default your loopback[^1]) ip
+  - (automagically[^1] selected interface) ip
 
-[^1]: why loopback you may ask? Because gotcha builds with a looback interface by default (see [here](#overrides) on how to override), because you're ought to override it yourself :)
+[^1]: automagically in the sense of that it _should_ select the appropriate interface
 
 ## 🛠️ benchmarks
 
