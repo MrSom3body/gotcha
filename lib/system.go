@@ -126,7 +126,8 @@ func GetIpAddress() string {
 
 	for _, iface := range interfaces {
 		if !strings.HasPrefix(iface.Name, "en") &&
-			!strings.HasPrefix(iface.Name, "wl") ||
+			!strings.HasPrefix(iface.Name, "wl") &&
+			!strings.HasPrefix(iface.Name, "eth") ||
 			iface.Flags&net.FlagUp == 0 ||
 			iface.Flags&net.FlagLoopback != 0 {
 			continue
