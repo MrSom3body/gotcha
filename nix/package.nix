@@ -13,7 +13,7 @@ buildGoModule rec {
   ldflags = [
     "-s -w"
     "-X 'github.com/MrSom3body/gotcha/cmd.color=${color}'"
-    "-X 'github.com/MrSom3body/gotcha/cmd.version=${version}'"
+    "-X 'github.com/MrSom3body/gotcha/cmd.version=v${version}'"
     "-extldflags '-static'"
   ];
 }
