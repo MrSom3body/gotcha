@@ -2,12 +2,14 @@
 
 ![preview](.github/assets/preview.png)
 
-gotcha is a small fetcher written in go. It has absolutely no customization (at least for now) and is primarily intended for my system.
+gotcha is a small fetcher written in go. It has absolutely no customization (at
+least for now) and is primarily intended for my system.
 
 ## ✨ features
 
 - speedy boi (on my machine [<2ms](#benchmarks))
 - no dependencies besides linux and the binary itself (and go for building duh)
+- can update itself with `gotcha update`
 - displays:
   - distribution
   - kernel version
@@ -15,13 +17,16 @@ gotcha is a small fetcher written in go. It has absolutely no customization (at 
   - shell
   - desktop environment/window manager
   - memory usage
-  - (automagically[^1] selected interface) ip
+  - ip (of an automagically[^1] selected interface)
 
-[^1]: automagically in the sense of that it _should_ select the appropriate interface
+[^1]:
+    automagically in the sense of that it _should_ select the appropriate
+    interface
 
 ## 🛠️ benchmarks
 
-With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I know (and mine ofc):
+With my `AMD Ryzen 9 6900HX` CPU I get the following results from some fetches I
+know (and mine ofc):
 
 | Command     |    Mean [ms] | Min [ms] | Max [ms] |       Relative |
 | :---------- | -----------: | -------: | -------: | -------------: |
@@ -60,17 +65,21 @@ inputs.gotcha.packages.${pkgs.system}.default
 
 ### 🐧 all other distributions
 
-Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or compile it yourself if you want an useful output for your local IP. You can do that really easy by installing go and running the following commands:
+Get the [latest release](https://github.com/MrSom3body/gotcha/releases) or just
+compile it yourself. Compiling it is extremely easy if you have `just` installed
+(or else copy the command with `go build` in it from the `justfile`):
 
 ```bash
-git clone https://github.com/MrSom3body/gotcha
-cd gotcha
-go build -ldflags="-s -w"
+just build
 ```
+
+After installing it you can update it by simply using `gotcha update`.
 
 ### 🧰 overrides
 
-There is no real configuration, but you can override some values to change some things. The process of this is imo easier for nix but if you compile it yourself because you use a ~inferior~ different distro you need to do so with some flags.
+There is no real configuration, but you can override some values to change some
+things. The process of this is imo easier for nix but if you compile it yourself
+because you use a ~inferior~ different distro you need to do so with some flags.
 
 | Key   | Default Value | Description                                                           |
 | ----- | ------------- | --------------------------------------------------------------------- |
@@ -83,7 +92,8 @@ There is no real configuration, but you can override some values to change some 
 
 #### ❄️ nix overrides
 
-If you want to change the interface name for the IP you can override the package like this:
+If you want to change the interface name for the IP you can override the package
+like this:
 
 ```nix
 (inputs.gotcha.packages.${pkgs.system}.default.override {
@@ -93,7 +103,8 @@ If you want to change the interface name for the IP you can override the package
 
 #### 🔨 compiling
 
-For every override you want to add you must add this `-X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
+For every override you want to add you must add this `-X
+'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
 
 ```bash
 go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'"
