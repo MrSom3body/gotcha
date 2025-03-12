@@ -38,8 +38,22 @@ func isLatestVersion(release Release) bool {
 	return release.TagName == version
 }
 
+func getAssetURL(release Release, assetName string) (string, error) {
+	for _, asset := range release.Assets {
+		if asset.Name == assetName {
+			return asset.BrowserDownloadURL, nil
+		}
+	}
+	return "", fmt.Errorf("asset %s not found", assetName)
+}
+
 func updateBinary(release Release, filePath string) error {
-	resp, err := http.Get(release.Assets[0].BrowserDownloadURL)
+	assetURL, err := getAssetURL(release, "gotcha")
+	if err != nil {
+		return err
+	}
+
+	resp, err := http.Get(assetURL)
 	if err != nil {
 		return fmt.Errorf("download failed: %w", err)
 	}
