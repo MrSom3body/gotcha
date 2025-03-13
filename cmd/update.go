@@ -59,17 +59,33 @@ func updateBinary(release Release, filePath string) error {
 	}
 	defer resp.Body.Close()
 
-	out, err := os.Create(filePath)
+	out, err := os.Create(filePath + "~")
 	if err != nil {
 		return fmt.Errorf("file creation failed: %w", err)
 	}
 	defer out.Close()
 
-	if _, err := io.Copy(out, resp.Body); err != nil {
-		return fmt.Errorf("file write failed: %w", err)
+	_, err = io.Copy(out, resp.Body)
+	if err != nil {
+		return fmt.Errorf("writing new version failed: %w", err)
 	}
 
-	return exec.Command("chmod", "+x", filePath).Run()
+	err = os.Remove(filePath)
+	if err != nil {
+		return fmt.Errorf("deleting old version failed: %w", err)
+	}
+
+	err = os.Rename(filePath+"~", filePath)
+	if err != nil {
+		return fmt.Errorf("moving new version failed: %w", err)
+	}
+
+	err = exec.Command("chmod", "+x", filePath).Run()
+	if err != nil {
+		return fmt.Errorf("making gotcha executable failed: %w", err)
+	}
+
+	return nil
 }
 
 var updateCmd = &cobra.Command{
@@ -77,10 +93,7 @@ var updateCmd = &cobra.Command{
 	Short: "Update gotcha",
 	Long:  "Update gotcha if there is a new version available",
 	Run: func(cmd *cobra.Command, args []string) {
-		filePath, err := os.Executable()
-		if err != nil {
-			log.Fatal("Failed to determine executable path:", err)
-		}
+		filePath := os.ExpandEnv("$HOME/.local/bin/gotcha")
 
 		if fileInfo, err := os.Stat(filePath); err != nil || fileInfo.Mode()&0200 == 0 {
 			log.Fatal("Gotcha is installed in a read-only location, can't update!")
