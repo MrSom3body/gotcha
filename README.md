@@ -7,7 +7,7 @@ least for now) and is primarily intended for my system.
 
 ## ✨ features
 
-- speedy boi (on my machine [<2ms](#benchmarks))
+- speedy boi (on my machine [<2ms](#%EF%B8%8F-benchmarks))
 - no dependencies besides linux and the binary itself (and go for building duh)
 - can update itself with `gotcha update`
 - displays:
