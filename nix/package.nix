@@ -26,4 +26,6 @@ buildGoModule rec {
     $out/bin/gotcha completion zsh > $out/share/zsh/site-functions/_gotcha
     $out/bin/gotcha completion fish > $out/share/fish/vendor_completions.d/gotcha.fish
   '';
+
+  meta.mainProgram = "gotcha";
 }
