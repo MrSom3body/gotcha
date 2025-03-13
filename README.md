@@ -115,3 +115,14 @@ go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'"
 go + fetch → gofetch → gotch → gotcha
 
 I know gotcha makes absolutely no sense for a fetcher but idc :)
+
+## ⭐ Stargraph
+
+<picture>
+  <source media="(prefers-color-scheme: dark)"
+    srcset="https://api.star-history.com/svg?repos=MrSom3body/gotcha&type=Date&theme=dark"/>
+  <source media="(prefers-color-scheme: light)"
+    srcset="https://api.star-history.com/svg?repos=MrSom3body/gotcha&type=Date"/>
+  <img alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=MrSom3body/gotcha&type=Date"/>
+</picture>
