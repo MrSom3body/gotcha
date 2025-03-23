@@ -2,12 +2,14 @@ package cmd
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -20,16 +22,19 @@ type Release struct {
 	} `json:"assets"`
 }
 
-func getNewestRelease() (Release, error) {
+const gotchaBinary = "$HOME/.local/bin/gotcha"
+
+func fetchLatestRelease() (Release, error) {
 	resp, err := http.Get("https://api.github.com/repos/MrSom3body/gotcha/releases/latest")
 	if err != nil {
-		return Release{}, fmt.Errorf("request failed: %w", err)
+		return Release{}, fmt.Errorf("failed to fetch release info: %w", err)
 	}
 	defer resp.Body.Close()
 
 	var release Release
-	if err := json.NewDecoder(resp.Body).Decode(&release); err != nil {
-		return Release{}, fmt.Errorf("failed to parse response: %w", err)
+	err = json.NewDecoder(resp.Body).Decode(&release)
+	if err != nil {
+		return Release{}, fmt.Errorf("failed to parse release data: %w", err)
 	}
 	return release, nil
 }
@@ -55,36 +60,79 @@ func updateBinary(release Release, filePath string) error {
 
 	resp, err := http.Get(assetURL)
 	if err != nil {
-		return fmt.Errorf("download failed: %w", err)
+		return fmt.Errorf("failed to download update: %w", err)
 	}
 	defer resp.Body.Close()
 
 	out, err := os.Create(filePath + "~")
 	if err != nil {
-		return fmt.Errorf("file creation failed: %w", err)
+		return fmt.Errorf("failed to create temp file: %w", err)
 	}
 	defer out.Close()
 
 	_, err = io.Copy(out, resp.Body)
 	if err != nil {
-		return fmt.Errorf("writing new version failed: %w", err)
+		return fmt.Errorf("failed to write update: %w", err)
 	}
 
-	err = os.Remove(filePath)
-	if err != nil {
-		return fmt.Errorf("deleting old version failed: %w", err)
+	_, err = os.Stat(filePath)
+	if err == nil {
+		err = os.Remove(filePath)
+		if err != nil {
+			return fmt.Errorf("failed to delete old version: %w", err)
+		}
 	}
 
 	err = os.Rename(filePath+"~", filePath)
 	if err != nil {
-		return fmt.Errorf("moving new version failed: %w", err)
+		return fmt.Errorf("failed to install new version: %w", err)
 	}
 
 	err = exec.Command("chmod", "+x", filePath).Run()
 	if err != nil {
-		return fmt.Errorf("making gotcha executable failed: %w", err)
+		return fmt.Errorf("failed to make gotcha executable: %w", err)
 	}
 
+	return nil
+}
+
+func installGotchaPrompt(filePath string) bool {
+	fmt.Printf("Gotcha is not installed under %s. Do you want to install it there? [y/N] ", filePath)
+	var input string
+	fmt.Scanln(&input)
+	return strings.ToLower(input) == "y"
+}
+
+func deleteOldGotcha(oldPath string) error {
+	fmt.Print("Do you also want to delete the old gotcha? [Y/n] ")
+	var input string
+	fmt.Scanln(&input)
+	if input != "" && strings.ToLower(input) != "y" {
+		fmt.Printf("Old version not deleted. It remains at %s.\n", oldPath)
+		return nil
+	}
+
+	info, err := os.Stat(oldPath)
+	if err != nil {
+		return fmt.Errorf("failed to fetch file info: %w", err)
+	}
+
+	if info.Mode()&os.ModeSymlink != 0 {
+		oldPath, err = os.Readlink(oldPath)
+		if err != nil {
+			return fmt.Errorf("failed to resolve symlink: %w", err)
+		}
+	}
+
+	if info.Mode().Perm()&0200 == 0 {
+		return errors.New(fmt.Sprintf("can not delete read-only binary: %s", oldPath))
+	}
+
+	if err := os.Remove(oldPath); err != nil {
+		return fmt.Errorf("failed to delete old gotcha: %w", err)
+	}
+
+	fmt.Println("Deleted old gotcha!")
 	return nil
 }
 
@@ -93,30 +141,42 @@ var updateCmd = &cobra.Command{
 	Short: "Update gotcha",
 	Long:  "Update gotcha if there is a new version available",
 	Run: func(cmd *cobra.Command, args []string) {
-		filePath := os.ExpandEnv("$HOME/.local/bin/gotcha")
+		filePath := os.ExpandEnv(gotchaBinary)
 
-		if fileInfo, err := os.Stat(filePath); err != nil || fileInfo.Mode()&0200 == 0 {
-			log.Fatal("Gotcha is installed in a read-only location, can't update!")
+		gotchaPath, err := os.Executable()
+		if err != nil {
+			log.Fatalf("Failed to determine executable path: %v", err)
+		}
+
+		if gotchaPath != filePath {
+			if installGotchaPrompt(filePath) {
+				if err := deleteOldGotcha(gotchaPath); err != nil {
+					log.Fatalf("Deleting old gotcha failed: %v", err)
+				}
+			} else {
+				fmt.Println("Did not install gotcha.")
+				return
+			}
 		}
 
 		fmt.Println("Checking for a new release...")
-		release, err := getNewestRelease()
+		release, err := fetchLatestRelease()
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		if isLatestVersion(release) {
-			fmt.Println("You're already on the newest version 🥳")
+			fmt.Println("You're already on the latest version 🥳")
 			return
 		}
 
-		fmt.Println("Found a new release, updating...")
+		fmt.Println("New release found, updating...")
 		if err := updateBinary(release, filePath); err != nil {
-			log.Fatalf("Updating failed: %v", err)
+			log.Fatalf("Update failed: %v", err)
 		}
-		fmt.Printf("You now have gotcha %s 🥳!\n", release.TagName)
-	},
-}
+
+		fmt.Printf("Update successful! Gotcha is now at version %s 🥳\n", release.TagName)
+	}}
 
 func init() {
 	rootCmd.AddCommand(updateCmd)
