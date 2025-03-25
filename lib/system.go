@@ -54,6 +54,11 @@ func GetUptime() string {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	if uptime_float < 60 {
+		return "< 1 minute"
+	}
+
 	uptime := int(uptime_float)
 
 	parts := make([]string, 0, 3)
