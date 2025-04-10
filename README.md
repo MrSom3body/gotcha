@@ -116,7 +116,12 @@ go + fetch → gofetch → gotch → gotcha
 
 I know gotcha makes absolutely no sense for a fetcher but idc :)
 
-## ⭐ Stargraph
+## 🫂 credits
+
+- [NotAShelf/microfetch](https://github.com/NotAShelf/microfetch) for inspiring me to write my own fetch
+- [Macchina-CLI/macchina](https://github.com/Macchina-CLI/macchina) for providing an idea on how I'd like it to look
+
+## ⭐ stargraph
 
 <picture>
   <source media="(prefers-color-scheme: dark)"
