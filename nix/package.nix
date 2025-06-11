@@ -6,7 +6,7 @@ buildGoModule rec {
   pname = "gotcha";
   version = "2.2.5";
   src = ./..;
-  vendorHash = "sha256-hocnLCzWN8srQcO3BMNkd2lt0m54Qe7sqAhUxVZlz1k=";
+  vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
 
   env.CGO_ENABLED = 0;
 
