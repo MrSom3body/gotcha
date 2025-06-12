@@ -29,13 +29,9 @@ jobs:
       tag: ${{ github.ref_name }}
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: result/bin
           merge-multiple: true
 
       - name: Create release
@@ -47,7 +43,7 @@ jobs:
 
       - name: Upload assets
         run: |
-          gh release upload "$tag" result/bin/*
+          gh release upload "$tag" *
 
   build:
     name: Build binary
