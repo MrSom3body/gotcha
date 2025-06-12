@@ -1,5 +1,9 @@
 # 🐹 gotcha, my small fetch tool
 
+![GitHub Actions Build Status](https://img.shields.io/github/actions/workflow/status/MrSom3body/gotcha/build.yml?style=for-the-badge)
+![GitHub Actions Checks Status](https://img.shields.io/github/actions/workflow/status/MrSom3body/gotcha/checks.yml?label=checks&style=for-the-badge)
+![GitHub Release Version](https://img.shields.io/github/v/release/MrSom3body/gotcha?style=for-the-badge)
+![GitHub Downloads](https://img.shields.io/github/downloads/MrSom3body/gotcha/total?style=for-the-badge)
 ![preview](.github/assets/preview.png)
 
 gotcha is a small fetcher written in go. It has absolutely no customization (at
