@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "**.go"
+      - "**.nix"
       - "**.lock"
       - ".github/workflows/build.yml"
 
@@ -24,9 +25,13 @@ jobs:
       tag: ${{ github.ref_name }}
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
+          path: build
           merge-multiple: true
 
       - name: Create release
@@ -38,7 +43,7 @@ jobs:
 
       - name: Upload assets
         run: |
-          gh release upload "$tag" *
+          gh release upload "$tag" build/*
 
   build:
     name: Build binary

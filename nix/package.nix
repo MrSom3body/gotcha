@@ -5,7 +5,7 @@
   enableUpdateCmd ? false,
 }:
 buildGoModule rec {
-  pname = "gotcha";
+  pname = "gotcha" + lib.optionalString enableUpdateCmd "-update";
   version = "2.2.6";
   src = ./..;
   vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
@@ -23,15 +23,23 @@ buildGoModule rec {
     "-extldflags '-static'"
   ];
 
+  installPhase = ''
+    runHook preInstall
+
+    install -Dm755 $GOPATH/bin/gotcha $out/bin/${pname}
+
+    runHook postInstall
+  '';
+
   postInstall = ''
     mkdir -p $out/share/bash-completion/completions
     mkdir -p $out/share/zsh/site-functions
     mkdir -p $out/share/fish/vendor_completions.d
 
-    $out/bin/gotcha completion bash > $out/share/bash-completion/completions/gotcha
-    $out/bin/gotcha completion zsh > $out/share/zsh/site-functions/_gotcha
-    $out/bin/gotcha completion fish > $out/share/fish/vendor_completions.d/gotcha.fish
+    $out/bin/${pname} completion bash > $out/share/bash-completion/completions/${pname}
+    $out/bin/${pname} completion zsh > $out/share/zsh/site-functions/_${pname}
+    $out/bin/${pname} completion fish > $out/share/fish/vendor_completions.d/${pname}.fish
   '';
 
-  meta.mainProgram = "gotcha";
+  meta.mainProgram = pname;
 }
