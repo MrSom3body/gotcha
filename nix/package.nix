@@ -6,7 +6,7 @@
 }:
 buildGoModule rec {
   pname = "gotcha" + lib.optionalString enableUpdateCmd "-update";
-  version = "2.2.6";
+  version = "2.3.0";
   src = ./..;
   vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
 
