@@ -7,11 +7,6 @@ on:
       - "**.go"
       - "**.lock"
       - ".github/workflows/build.yml"
-  pull_request:
-    paths:
-      - "**.go"
-      - "**.lock"
-      - ".github/workflows/build.yml"
 
 permissions:
   contents: write
