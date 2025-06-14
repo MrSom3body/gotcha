@@ -14,6 +14,9 @@
     packages = forEachSystem (system: {
       default = self.packages.${system}.gotcha;
       gotcha = pkgsForEach.${system}.callPackage ./nix/package.nix {};
+      gotcha-update = pkgsForEach.${system}.callPackage ./nix/package.nix {
+        enableUpdateCmd = true;
+      };
     });
 
     devShells = forEachSystem (system: {

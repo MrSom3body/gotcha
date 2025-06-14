@@ -1,3 +1,6 @@
+//go:build update
+// +build update
+
 package cmd
 
 import (
@@ -53,7 +56,7 @@ func getAssetURL(release Release, assetName string) (string, error) {
 }
 
 func updateBinary(release Release, filePath string) error {
-	assetURL, err := getAssetURL(release, "gotcha")
+	assetURL, err := getAssetURL(release, "gotcha-update")
 	if err != nil {
 		return err
 	}

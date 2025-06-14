@@ -1,6 +1,8 @@
 {
+  lib,
   buildGoModule,
   color ? "6",
+  enableUpdateCmd ? false,
 }:
 buildGoModule rec {
   pname = "gotcha";
@@ -9,6 +11,10 @@ buildGoModule rec {
   vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
 
   env.CGO_ENABLED = 0;
+
+  tags = lib.optional enableUpdateCmd [
+    "update"
+  ];
 
   ldflags = [
     "-s -w"
