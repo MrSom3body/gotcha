@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: "Install Lix"
-        uses: DeterminateSystems/nix-installer-action@v17
+        uses: DeterminateSystems/nix-installer-action@v18
         with:
           source-url: "https://install.lix.systems/lix/lix-installer-x86_64-linux"
           diagnostic-endpoint: "" # so eelco can have more personalized self-merges? no thank you
@@ -90,7 +90,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: "Install Lix"
-        uses: DeterminateSystems/nix-installer-action@v17
+        uses: DeterminateSystems/nix-installer-action@v18
         with:
           source-url: "https://install.lix.systems/lix/lix-installer-x86_64-linux"
           diagnostic-endpoint: "" # so eelco can have more personalized self-merges? no thank you
