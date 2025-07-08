@@ -21,7 +21,7 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: Setup Nix magic cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
+        uses: DeterminateSystems/magic-nix-cache-action@v12
         with:
           diagnostic-endpoint: ""
 
