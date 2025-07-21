@@ -71,7 +71,8 @@ jobs:
         with:
           diagnostic-endpoint: ""
 
-      - uses: cachix/cachix-action@v15
+      - name: Set up cachix cache
+        uses: cachix/cachix-action@v15
         with:
           name: gotcha
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"

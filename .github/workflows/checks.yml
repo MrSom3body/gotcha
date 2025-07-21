@@ -20,10 +20,11 @@ jobs:
           extra-conf: |
             experimental-features = nix-command flakes
 
-      - name: Setup Nix magic cache
-        uses: DeterminateSystems/magic-nix-cache-action@v13
+      - name: Set up cachix cache
+        uses: cachix/cachix-action@v15
         with:
-          diagnostic-endpoint: ""
+          name: gotcha
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Run checks
         run: |
