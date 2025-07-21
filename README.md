@@ -53,6 +53,7 @@ inputs = {
   # ...
   gotcha = {
     url = "github:MrSom3body/gotcha";
+    # only add the inputs part if you don't want to use the cache
     inputs = {
       nixpkgs.follows = "nixpkgs";
     };
@@ -65,6 +66,25 @@ Andddd add this the package to home-manager or your system wide nix config:
 
 ```nix
 inputs.gotcha.packages.${pkgs.system}.default
+```
+
+#### 🍱 Cache
+
+If you want to use the cache you can do so by adding the following lines to your
+nix config:
+
+```nix
+{
+  nix.settings = {
+    substituters = [
+      "https://gotcha.cachix.org"
+    ];
+    trusted-public-keys = [
+      "gotcha.cachix.org-1:HvkCMDHVThJj/aaxBgDvjraKYSNM1yFKveTsPYG3YUA="
+    ];
+  };
+}
+
 ```
 
 ### 🐧 all other distributions
@@ -107,8 +127,8 @@ like this:
 
 #### 🔨 compiling
 
-For every override you want to add you must add this `-X
-'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
+For every override you want to add you must add this
+`-X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'` to the `-ldflags` like so:
 
 ```bash
 go build -ldflags="-s -w -X 'github.com/MrSom3body/gotcha/cmd.<key>=<value>'"
@@ -122,8 +142,10 @@ I know gotcha makes absolutely no sense for a fetcher but idc :)
 
 ## 🫂 credits
 
-- [NotAShelf/microfetch](https://github.com/NotAShelf/microfetch) for inspiring me to write my own fetch
-- [Macchina-CLI/macchina](https://github.com/Macchina-CLI/macchina) for providing an idea on how I'd like it to look
+- [NotAShelf/microfetch](https://github.com/NotAShelf/microfetch) for inspiring
+  me to write my own fetch
+- [Macchina-CLI/macchina](https://github.com/Macchina-CLI/macchina) for
+  providing an idea on how I'd like it to look
 
 ## ⭐ stargraph
 
