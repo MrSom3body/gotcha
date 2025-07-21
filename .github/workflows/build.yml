@@ -71,6 +71,11 @@ jobs:
         with:
           diagnostic-endpoint: ""
 
+      - uses: cachix/cachix-action@v15
+        with:
+          name: gotcha
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
       - name: Build
         run: |
           nix build .#packages.x86_64-linux.${{ matrix.package }}
