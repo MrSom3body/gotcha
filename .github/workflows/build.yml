@@ -107,3 +107,8 @@ jobs:
       - name: Run go tests
         run: |
           nix develop --command -- go test ./...
+
+      - uses: cachix/cachix-action@v16
+        with:
+          name: gotcha
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
