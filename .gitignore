@@ -1,5 +1,8 @@
-.direnv/
+### nix ###
+.direnv
+/.pre-commit-config.yaml
 result
+/*-
 
-# ignore compiled binary
+### go ###
 gotcha

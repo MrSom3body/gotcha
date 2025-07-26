@@ -1,22 +1,23 @@
 {
-  mkShell,
-  go,
-  gopls,
-  gotools,
-  go-tools,
-  hyperfine,
-  just,
+  self,
+  pkgs,
 }:
-mkShell {
-  buildInputs = [
-    go
-    gopls
-    gotools
-    go-tools
-  ];
+{
+  default = pkgs.mkShell {
+    packages = with pkgs; [
+      go
+      gopls
+      gotools
+      go-tools
+    ];
 
-  packages = [
-    hyperfine
-    just
-  ];
+    buildInputs = with pkgs; [
+      hyperfine
+      just
+    ];
+
+    shellHook = ''
+      ${self.checks.${pkgs.system}.pre-commit-check.shellHook}
+    '';
+  };
 }
