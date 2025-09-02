@@ -8,7 +8,7 @@ buildGoModule rec {
   pname = "gotcha" + lib.optionalString enableUpdateCmd "-update";
   version = "2.3.0";
   src = ./..;
-  vendorHash = "sha256-m5mBubfbXXqXKsygF5j7cHEY+bXhAMcXUts5KBKoLzM=";
+  vendorHash = "sha256-hpAsYPhiYnTpY5Z7QZz9cr5RtleHnR1ezgoVaQ+cvp0=";
 
   env.CGO_ENABLED = 0;
 
