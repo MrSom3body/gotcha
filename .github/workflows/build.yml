@@ -84,7 +84,7 @@ jobs:
           nix build .#packages.x86_64-linux.${{ matrix.package }}
 
       - name: Upload workflow artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.package }}
           path: result/bin/${{ matrix.package }}
