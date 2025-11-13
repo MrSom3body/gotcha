@@ -97,14 +97,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: "Install Lix"
-        uses: DeterminateSystems/nix-installer-action@v20
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
         with:
-          source-url: "https://install.lix.systems/lix/lix-installer-x86_64-linux"
-          diagnostic-endpoint: "" # so eelco can have more personalized self-merges? no thank you
-          backtrace: "true"
-          extra-conf: |
-            experimental-features = nix-command flakes
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run go tests
         run: |
