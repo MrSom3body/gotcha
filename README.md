@@ -65,7 +65,7 @@ inputs = {
 Andddd add this the package to home-manager or your system wide nix config:
 
 ```nix
-inputs.gotcha.packages.${pkgs.system}.default
+inputs.gotcha.packages.${pkgs.stdenv.hostPlatform.system}.default
 ```
 
 #### 🍱 Cache
@@ -110,8 +110,8 @@ because you use a ~inferior~ different distro you need to do so with some flags.
 | color | `6`           | The integer value of the color (0-7[^2]) you want to use for the keys |
 
 [^2]:
-    Use one of these commands to display the 8 colors:  
-    bash: `for i in $(seq 0 7); do tput setaf $i && echo $i; done`  
+    Use one of these commands to display the 8 colors:
+    bash: `for i in $(seq 0 7); do tput setaf $i && echo $i; done`
     fish: `for i in (seq 0 7); tput setaf $i && echo $i; end`
 
 #### ❄️ nix overrides
@@ -120,7 +120,7 @@ If you want to change the interface name for the IP you can override the package
 like this:
 
 ```nix
-(inputs.gotcha.packages.${pkgs.system}.default.override {
+(inputs.gotcha.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
   <key> = "<value>";
 })
 ```
