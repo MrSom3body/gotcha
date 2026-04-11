@@ -6,15 +6,13 @@
 }:
 buildGoModule rec {
   pname = "gotcha" + lib.optionalString enableUpdateCmd "-update";
-  version = "2.3.1";
+  version = "2.3.2";
   src = ./..;
   vendorHash = "sha256-hpAsYPhiYnTpY5Z7QZz9cr5RtleHnR1ezgoVaQ+cvp0=";
 
   env.CGO_ENABLED = 0;
 
-  tags = lib.optional enableUpdateCmd [
-    "update"
-  ];
+  tags = lib.optional enableUpdateCmd [ "update" ];
 
   ldflags = [
     "-s -w"
