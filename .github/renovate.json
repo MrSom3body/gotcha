@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "assignees": ["MrSom3body"],
+  "timezone": "Europe/Vienna",
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* 0-3 * * *"],
+    "commitMessageAction": "update",
+    "prBodyDefinitions": {
+      "Change": "All flake/module inputs updated"
+    }
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["nix"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "flake.lock:",
+      "prBodyNotes": ["This PR updates nix flake inputs."],
+      "addLabels": ["dependencies", "automated"]
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "matchManagers": ["nix"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "rebase",
+      "commitMessagePrefix": "flake.lock:",
+      "addLabels": ["dependencies", "automated"]
+    }
+  ]
+}
