@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}:
-{
+{ inputs, pkgs, ... }: {
   pre-commit-check = inputs.git-hooks-nix.lib.${pkgs.stdenv.hostPlatform.system}.run {
     src = ../.;
     hooks = {
@@ -13,7 +8,7 @@
       # nix
       deadnix.enable = true;
       nil.enable = true;
-      nixfmt-rfc-style.enable = true;
+      nixfmt.enable = true;
       statix.enable = true;
 
       # markdown
